@@ -1,0 +1,6 @@
+config BR2_PACKAGE_DOTNETDEMO
+        bool "dotnetdemo"
+        depends on BR2_PACKAGE_MONO
+        depends on BR2_PACKAGE_HOST_MONO_ARCH_SUPPORTS
+        help
+          Simple C# application.
