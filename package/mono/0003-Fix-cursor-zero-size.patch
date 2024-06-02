@@ -1,0 +1,14 @@
+--- a/mcs/class/System.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	2022-06-14 22:36:01.000000000 +0200
++++ b/mcs/class/System.Windows.Forms/System.Windows.Forms/XplatUIX11.cs	2024-06-01 17:17:34.572465212 +0200
+@@ -3088,6 +3088,11 @@
+ 			if (XQueryBestCursor(DisplayHandle, RootWindow, bitmap.Width, bitmap.Height, out width, out height) == 0) {
+ 				return IntPtr.Zero;
+ 			}
++			
++			if(width == 0 || height == 0) {
++				width = bitmap.Width;
++				height = bitmap.Height;
++			}
+ 
+ 			// Win32 only allows creation cursors of a certain size
+ 			if ((bitmap.Width != width) || (bitmap.Width != height)) {
