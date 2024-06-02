@@ -1,0 +1,121 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	compatible = "brcm,bcm2835";
+
+	fragment@0 {
+		target = <&spi0_cs_pins>;
+
+		frag0: __overlay__ {
+			brcm,pins = <8 7>;
+		};
+	};
+
+
+	fragment@1 {
+		target = <&spidev0>;
+
+		frag1: __overlay__ {
+			status = "disabled";
+		};
+	};
+
+
+	fragment@2 {
+		target = <&spidev1>;
+
+		frag2: __overlay__ {
+			status = "disabled";
+		};
+	};
+
+	fragment@3 {
+		target = <&spi0>;
+
+		frag3: __overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			cs-gpios = <&gpio 8 1>, <&gpio 7 1>;
+			status = "okay";
+
+			lcd: lcd_spi@0 {
+				compatible = "multi-inno,mi0283qt", "mi0283qt";
+				reg = <0>;
+				spi-max-frequency = <16000000>; /*<32000000>;*/
+				rotation = <270>;
+				bgr;
+				fps = <10>;
+				buswidth = <8>;
+				reset-gpios = <&gpio 27 0>;
+				dc-gpios = <&gpio 22 0>;
+				debug = <3>;
+			};
+
+			touch: touch_spi@1 {
+				compatible = "ti,ads7846";
+				reg = <1>;
+				spi-max-frequency = <2000000>;
+				interrupts = <17 2>;
+				interrupt-parent = <&gpio>;
+				pendown-gpio = <&gpio 17 1>;
+				ti,x-plate-ohms = /bits/ 16 <60>;
+				ti,pressure-max = /bits/ 16 <255>;
+			};
+		};
+	};
+
+	/*
+	fragment@4 {
+		// Enable power for GPU
+		target = <&v3d>;
+
+		frag4: __overlay__ {
+			status = "okay";
+		};
+	};
+
+
+	fragment@5 {
+		// Enable GPU
+		target = <&gpu>;
+
+		frag5: __overlay__ {
+			status = "okay";
+		};
+	};
+	*/
+};
+
+/*
+# Compile with
+dtc -@ -I dts -O dtb -o rpi0wlcd.dtbo rpi0wlcd.dts
+
+# Hardware pins
+11 TP_IRQ		GPIO17	(GPIO_GEN0)	Touch Panel interrupt
+12 KEY1			GPIO18	(GPIO_GEN1)	Key
+13 RST			GPIO27	(GPIO_GEN2)	Reset
+15 LCD_RS		GPIO22	(GPIO_GEN3)	LCD Instruction/Data
+16 KEY2			GPIO23	(GPIO_GEN4)	KEY
+18 KEY3			GPIO24	(GPIO_GEN5)	KEY
+19 LCD_SI/TP_SI		GPIO10	(SPI_MOSI)	SPI data in LCD/Touch Panel
+21 TP_SO		GPIO9	(SPI_MISO)	SPI data out Touch Panel
+23 LCD_SCK/TP_SCK	GPIO11	(SPI_SCLK)	SPI clock LCD/Touch Panel
+24 LCD_CS		GPIO8	(SPI_CE0_N)	LCD chip selection, low active
+26 TP_CS		GPIO7	(SPI_CE1_N)	Touch P. chip sel., low active
+
+# /etc/init.d/S50rpi0wlcd
+modprobe spi_bcm3835
+modprobe fb_ili9341
+modprobe ads7846
+
+# myfps.sh
+count=777;start=$(date +%s);i=0;while [ $i -ne $count ];do cat /dev/urandom > /dev/fb1 2> /dev/null;i=$(($i+1));done;stop=$(date +%s);echo FPS: $(($count/($stop-$start)))
+
+# cmdline.txt
+fbcon=map:1
+
+# GPU
+modprobe vc4 # GPU
+*/

@@ -1,0 +1,23 @@
+#!/bin/sh
+
+case "$1" in
+  start)
+	modprobe spi_bcm2835
+	modprobe mi0283qt
+	modprobe ads7846
+	;;
+  stop)
+	rmmod spi_bcm2835
+	rmmod mi0283qt
+	rmmod ads7846
+	;;
+  restart|reload)
+	"$0" stop
+	"$0" start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|restart}"
+	exit 1
+esac
+
+exit $?

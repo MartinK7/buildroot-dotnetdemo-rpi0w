@@ -2858,4 +2858,9 @@ menu "Text editors and viewers"
 	source "package/vim/Config.in"
 endmenu
 
+menu "Testing"
+	source "package/raspberrypi-lcd-ili9341/Config.in"
+	source "package/dotnetdemo/Config.in"
+endmenu
+
 endmenu

@@ -1,0 +1,9 @@
+config BR2_PACKAGE_RASPBERRYPI_LCD_ILI9341
+        bool "raspberrypi-lcd-ili9341"
+        depends on BR2_PACKAGE_RPI_FIRMWARE
+        select BR2_PACKAGE_HOST_DTC
+        select BR2_PACKAGE_RPI_FIRMWARE_INSTALL_DTB_OVERLAYS
+        help
+          This package adds support fot popular 320x240 LCD display.
+          The display have ILI9341 SPI controller and XPT2046 touch controller.
+          This package contain init script and device tree source overlay.
