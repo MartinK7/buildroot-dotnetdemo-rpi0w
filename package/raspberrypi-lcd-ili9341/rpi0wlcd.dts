@@ -66,6 +66,35 @@
 		};
 	};
 
+	fragment@4 {
+		target-path = "/";
+		
+		frag4: __overlay__ {		
+			gpio-keys {
+				compatible = "gpio-keys";
+				autorepeat;
+
+				down {
+					label = "K1";
+					linux,code = <108>; /* DOWN */
+					gpios = <&gpio 18 17>;
+				};
+
+				space {
+					label = "K2";
+					linux,code = <57>; /* SPACE */
+					gpios = <&gpio 23 17>;
+				};
+
+				tab {
+					label = "K3";
+					linux,code = <15>; /* TAB */
+					gpios = <&gpio 24 17>;
+				};
+			};
+		};
+	};
+
 	/*
 	fragment@4 {
 		// Enable power for GPU
