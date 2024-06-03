@@ -7,6 +7,17 @@ The demo runs on a Raspberry Pi Zero W with a 240x320 SPI display,
 showcasing the potential of using Buildroot to create a minimal Linux 
 distribution for such purposes.
 
+## Screenshots and Photos
+
+1. **Original old C# demo**:
+   ![screenshot](images/vc2008-dotnetdemo.png)
+
+2. **Raspberry Pi Zero W Setup**:
+   ![screenshot](images/rpi-setup.jpg)
+   
+3. **Raspberry Pi Zero W Running demo**:
+   ![screenshot](images/rpi-demo.jpg)
+
 ### Key changes in Buildroot
 1. **Added new packages**:
    - `package/dotnetdemo`: Main .NET demo application package.
@@ -42,18 +53,6 @@ To replicate this project, follow these steps:
    - Power on
    - The .NET C# demo application will starts automatically.
      (It can take longer ~1 minute on slower microSD cards)
-
-## Screenshots and Photos
-Include images to illustrate the setup and running demo:
-
-1. **Original old C# demo**:
-   ![screenshot](images/vc2008-dotnetdemo.png)
-
-2. **Raspberry Pi Zero W Setup**:
-   ![screenshot](images/rpi-setup.jpg)
-   
-3. **Raspberry Pi Zero W Running demo**:
-   ![screenshot](images/rpi-demo.jpg)
 
 ## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request
