@@ -59,4 +59,5 @@ Contributions are welcome! Please fork the repository and submit a pull request
 with your changes.
 
 ## License
-This project is licensed under the MIT License.
+This buildroot project is licensed under the GNU License.
+The dotnetdemo application @ https://github.com/MartinK7/dotnetdemo is licensed under the MIT License.
